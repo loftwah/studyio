@@ -44,13 +44,12 @@ def get_videos(term, video_limit, duration_limit):  # Input paremeters for searc
 
 def get_summary(term):  # Input term, return summarized wikipedia entry of topic
     try:  # In case no wikipedia page is found
-        term = term.replace(" ", "+")  # Set up query for wikipedia search
-        query = "https://en.wikipedia.org/w/index.php?sort=relevance&search={}&title=Special%3ASearch&profile=advanced&fulltext=1&advancedSearch-current=%7B%7D&ns0=1".format(term)
+        s_term = term.replace(" ", "+")  # Set up query for wikipedia search
+        query = "https://en.wikipedia.org/w/index.php?sort=relevance&search={}&title=Special%3ASearch&profile=advanced&fulltext=1&advancedSearch-current=%7B%7D&ns0=1ch".format(s_term)
         page = requests.get(query).content  # Fetch html and parse it
         soup = BeautifulSoup(page, features="html.parser")
         wiki_title = soup.find("div", {'class': 'mw-search-result-heading'}).text  # Find title of wiki page
-        summary = wikipedia.WikipediaPage(title = wiki_title).summary  # Use wikipedia api to get summary
-        summary = summary.partition('.')[0] + '.'  # Extract first setence
+        summary = wikipedia.summary(wiki_title, sentences=1)
         return summary  # Return the summarized setence
     except:
         return ""  # If not found just return empty string (will be replaced with secondary sources)
@@ -60,9 +59,10 @@ def get_summary(term):  # Input term, return summarized wikipedia entry of topic
 searches = [
 "Human Center Design",
 "Service Design",
-"Fast Protoyping",
+"Integration by Parts",
 "Marketing Strategy"
 ]
+
 
 with open("output.html", "w+", encoding="utf-8") as file:
 
@@ -82,9 +82,11 @@ with open("output.html", "w+", encoding="utf-8") as file:
             iframes += '<iframe src="https://www.youtube.com/embed/{}"></iframe>'.format(video['link'])
             
         topic_string = """
+        <div class="topic-card">
+        <div class="snapshot"></div>
         <div class="title">{}</div>
             <div class="summary">{}</div>
-            <div class="videos">{}</div>
+        </div>
         """.format(term, summary, iframes)
 
         try:

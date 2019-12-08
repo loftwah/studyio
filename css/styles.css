@@ -1,17 +1,58 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
 
 body {
     margin: 0;
     padding: 0; 
-    font-family: 'Roboto', sans-serif;
-    background-color: #FAFAFA;
+    font-family: 'Lato', sans-serif;
+    background-color: #F2F2F2;
+    color: #21242c;
 }
 
-.review-container {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
+.title {
+    font-weight: 600;
+    font-size: 22px;
+    padding: 20px 0px;
+    width: 90%;
+    margin: 0 auto;
 }
+
+.topic-card {
+    width: 350px;
+    background-color: #FAFAFA;
+    padding-bottom: 20px;
+    float: left;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.11), 
+              0 2px 2px rgba(0,0,0,0.11), 
+              0 4px 4px rgba(0,0,0,0.11), 
+              0 6px 8px rgba(0,0,0,0.11),
+              0 8px 16px rgba(0,0,0,0.11);
+}
+
+.snapshot {
+    width: 100%;
+    height: 200px;
+    background-image: url("https://image.freepik.com/free-vector/math-background_23-2148146940.jpg");
+    background-position: center;
+    background-size: cover;
+    filter: blur(2px);
+  -webkit-filter: blur(2px);
+}
+
+.summary {
+    font-size: 14px;
+    color: #A8A9A4;
+    width: 90%;
+    margin: 0 auto;
+    
+}
+
+
+.review-container {
+    display: inline-grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 50px;
+}
+/*
 
 .topic {
     text-align: center;
@@ -40,3 +81,4 @@ body {
     width: 500px;
     height: 250px;
 }
+*/
